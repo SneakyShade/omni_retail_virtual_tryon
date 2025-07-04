@@ -1,10 +1,10 @@
 # 🛍️ Omni Retail Virtual Try-On
 
-A real-time virtual try-on web application that lets users try Walmart products like glasses and hats using their webcam. Built with **Streamlit**, **OpenCV**, and **MediaPipe**, this app overlays fashion accessories on live video feed based on facial landmark detection.
+A real-time virtual try-on web application that lets users try Walmart products like glasses and hats using their photos. Built with **Streamlit**, **OpenCV**, and **MediaPipe**, this app overlays fashion accessories on Photos based on facial landmark detection.
 
 ## 🔥 Features
 - Try-on mode for both **glasses** and **hats**
-- Real-time webcam integration
+- Photo Upload Section
 - Accurate placement using MediaPipe Face Mesh
 - Product cards with price and "Buy on Walmart" link
 - Clean, responsive UI with product images
