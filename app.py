@@ -122,7 +122,7 @@ if selected_item:
                                     )
                 except Exception as e:
                     st.warning(f"Overlay Error: {e}")
-        if isinstance(frame,np.ndarray):
+        
             frame_rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
             st.image(frame, caption="🧢 Try-On Result", use_container_width=True)
         else:
