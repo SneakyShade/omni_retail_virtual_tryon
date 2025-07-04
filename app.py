@@ -1,5 +1,5 @@
 import os
-from product_data import product_links,product_names,product_prices
+from product_data import product_links, product_names, product_prices
 import cv2
 import numpy as np
 import streamlit as st
@@ -15,13 +15,14 @@ folder_map = {
     "Glasses": "assets/glasses",
     "Hats": "assets/hats"
 }
+
 # ---- UI Header ----
 st.markdown("<h1 style='text-align:center;'>🛒 Walmart Virtual Try-On</h1>", unsafe_allow_html=True)
 st.markdown("### 🕶️🧢Top Glasses and Hats On Sale @Walmart")
 category = st.radio("Choose Category", ["Glasses", "Hats"], horizontal=True)
 folder = folder_map[category]
 
-# ---- Display Product Cards (Horizontally Scrollable) ----
+# ---- Display Product Cards ----
 products = []
 for file in os.listdir(folder):
     if file.endswith(".png"):
@@ -40,54 +41,43 @@ for file in os.listdir(folder):
         })
 
 clicked_item = None
-
-# Display products in rows of 4
 for i in range(0, len(products), 4):
     row = st.columns(4)
-    for j, p in enumerate(products[i:i+4]):
+    for j, p in enumerate(products[i:i + 4]):
         with row[j]:
             st.image(p['img'], use_container_width=True)
             st.markdown(f"**{p['name']}**")
             st.markdown(f"🛒 *{p['price']}*")
-            if st.button("Try Now", key=f"try_{i+j}"):
+            if st.button("Try Now", key=f"try_{i + j}"):
                 clicked_item = p['filename']
             st.markdown(f"[Buy on Walmart]({p['buy']})", unsafe_allow_html=True)
 
-# Close scrolling container
-st.markdown("</div>", unsafe_allow_html=True)
-
-# Update session state only if a button is clicked
 if clicked_item:
     st.session_state['selected_item'] = clicked_item
 
-# Retrieve selected item
 selected_item = st.session_state.get("selected_item", None)
 
-# ---- Try-On Interface ----
+# ---- Try-On with File Upload ----
 if selected_item:
-    image_path = os.path.join(folder, selected_item)
-    try:
-        overlay = Image.open(image_path).convert("RGBA")
-        overlay = np.array(overlay)
-        overlay = cv2.cvtColor(overlay, cv2.COLOR_RGBA2BGRA)
-    except:
-        st.error("Couldn't load the selected item.")
+    st.subheader("📤 Upload your image for Virtual Try-On")
+    uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
 
-    run = st.checkbox("Start Webcam Try-On")
-    frame_window = st.image([])
+    if uploaded_file:
+        image_path = os.path.join(folder, selected_item)
+        try:
+            overlay = Image.open(image_path).convert("RGBA")
+            overlay = np.array(overlay)
+            
+        except:
+            st.error("Couldn't load the selected item.")
 
-    mp_face_mesh = mp.solutions.face_mesh
-    face_mesh = mp_face_mesh.FaceMesh()
-    cap = cv2.VideoCapture(0)
-
-    while run:
-        ret, frame = cap.read()
-        if not ret:
-            st.warning("Camera not accessible.")
-            break
+        input_image = Image.open(uploaded_file).convert("RGB")
+        frame = np.array(input_image)
 
         h, w, _ = frame.shape
-        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        mp_face_mesh = mp.solutions.face_mesh
+        face_mesh = mp_face_mesh.FaceMesh(static_image_mode=True)
+        rgb = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         result = face_mesh.process(rgb)
 
         if result.multi_face_landmarks:
@@ -132,6 +122,6 @@ if selected_item:
                 except Exception as e:
                     st.warning(f"Overlay Error: {e}")
 
-        frame_window.image(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-
-    cap.release()
+            st.image(frame, caption="🧢 Try-On Result", use_container_width=True)
+        else:
+            st.warning("No face detected. Please upload a clearer image.")
