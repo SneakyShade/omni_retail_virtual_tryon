@@ -45,7 +45,8 @@ for i in range(0, len(products), 4):
     row = st.columns(4)
     for j, p in enumerate(products[i:i + 4]):
         with row[j]:
-            st.image(p['img'], use_container_width=True)
+            st.markdown(f"<img src='{p['img']}' style='width:100%; border-radius:12px;'>",
+                     unsafe_allow_html=True)
             st.markdown(f"**{p['name']}**")
             st.markdown(f"🛒 *{p['price']}*")
             if st.button("Try Now", key=f"try_{i + j}"):
