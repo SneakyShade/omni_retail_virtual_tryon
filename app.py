@@ -122,7 +122,8 @@ if selected_item:
                                     )
                 except Exception as e:
                     st.warning(f"Overlay Error: {e}")
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        if isinstance(frame,np.ndarray):
+            frame_rgb = cv2.cvtcolor(frame,cv2.COLOR_BGR2RGB)
             st.image(frame, caption="🧢 Try-On Result", use_container_width=True)
         else:
             st.warning("No face detected. Please upload a clearer image.")
