@@ -31,7 +31,7 @@ product_prices = {
     "glass5.png": "$130.45",
     "glass6.png": "$161.99",
     "glass7.png": "$49.95",
-    "hat1.png": "$7.57",
+    "hat1.png": "$11.40",
     "hat2.png": "$7.98",
     "hat3.png": "$7.98",
     "hat4.png":"$16.99",
