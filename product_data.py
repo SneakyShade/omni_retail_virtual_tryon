@@ -20,7 +20,7 @@ product_links = {
         "hat9.png":"https://www.walmart.com/ip/Naruto-Cosplay-Kurama-Orange-Black-Snapback-Hat-For-Men/607042242?classType=REGULAR&from=/search",
         "hat10.png":"https://www.walmart.com/ip/Pokemon-Pikachu-Big-Face-Hat-with-Ears/1342323584?classType=REGULAR&from=/search",
         "hat11.png":"https://www.walmart.com/ip/Roffatide-Anime-Akatsuki-Red-Cloud-Baseball-Cap-Adjustable-Dad-Hat-Low-Profile-Snapback-Hat-Embroidered-Cotton-Curved-Brim-Golf-Hat-Black/1450544878?classType=VARIANT&from=/search",
-        #"hat12.png":"https://www.walmart.com/ip/Anime-Mario-Luigi-Game-Start-Baseball-Cap-Hat-universal-fit-for-Kids-Boy/12968161458?classType=REGULAR&from=/search"
+        "hat12.png":"https://www.walmart.com/ip/Mens-Super-Mario-Luigi-Cotton-Embroidered-Cosplay-Costume-Baseball-Cap-Green-D-Waluigi-Mario-Purple-Cosplay-hat-Soft-Twill-Unstructured-Dad-Cap/16461756953?classType=VARIANT&from=/search"
     }
 }
 product_prices = {
@@ -42,7 +42,7 @@ product_prices = {
     "hat9.png":"$16.19",
     "hat10.png":"$18.50",
     "hat11.png":"$19.99",
-    #"hat12.png":"$13.99"
+    "hat12.png":"$13.99"
 }
 product_names = {
     "glass1.png": "Panama Jack Men's Aviator",
@@ -63,5 +63,5 @@ product_names = {
     "hat9.png":"Naruto Cosplay Kurama Orange",
     "hat10.png":"Pokemon Pikachu Hat",
     "hat11.png":"Roffatide Anime Akatsuki Red cloud hat",
-    #"hat12.png":"Mario Luigi Game Hat"
+    "hat12.png":"Mario Game Hat"
 }
